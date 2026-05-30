@@ -35,10 +35,10 @@ speedtest-cli
 telegraph
 tenacity
 pyrotgfork[fast]
-tgcrypto
+pytgcrypto
 urllib3
 uvicorn
-uvloop==0.21.0
+uvloop
 xattr
 yt-dlp[default,curl-cffi]
 motor
