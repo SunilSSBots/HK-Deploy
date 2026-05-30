@@ -38,7 +38,7 @@ pyrotgfork[fast]
 pytgcrypto
 urllib3
 uvicorn
-uvloop
+uvloop>=0.22.1
 xattr
 yt-dlp[default,curl-cffi]
 motor
