@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM mysterysd/wzmlx:v3
 
 WORKDIR /usr/src/app
 
