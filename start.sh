@@ -1,4 +1,4 @@
 
 set -e
-python update.py
-exec python -m bot
+python3 update.py
+exec python3 -m bot
