@@ -4,10 +4,12 @@ WORKDIR /usr/src/app
 RUN chmod 777 /usr/src/app
 
 # ── Heroku Ban Bypass Symlinks ───────────────────────────────────────────────
-RUN ln -sf /usr/bin/aria2c          /usr/local/bin/blitzfetcher \
- && ln -sf /usr/bin/qbittorrent-nox /usr/local/bin/stormtorrent \
- && ln -sf /usr/bin/ffmpeg          /usr/local/bin/mediaforge \
- && ln -sf /usr/bin/rclone          /usr/local/bin/ghostdrive
+# BUG FIX: use $(which ...) so symlinks work regardless of where binaries are installed
+# Previously hardcoded /usr/bin/ffmpeg was broken if base image puts ffmpeg elsewhere
+RUN ln -sf "$(which aria2c)"          /usr/local/bin/blitzfetcher \
+ && ln -sf "$(which qbittorrent-nox)" /usr/local/bin/stormtorrent \
+ && ln -sf "$(which ffmpeg)"          /usr/local/bin/mediaforge \
+ && ln -sf "$(which rclone)"          /usr/local/bin/ghostdrive
 
 COPY requirements.txt .
 
