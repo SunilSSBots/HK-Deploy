@@ -9,7 +9,6 @@ asyncio
 beautifulsoup4
 lxml
 cloudscraper
-cryptography
 dnspython
 flask
 gevent
