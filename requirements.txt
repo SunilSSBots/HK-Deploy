@@ -22,7 +22,7 @@ psutil
 pybase64
 pycountry
 pymongo
-kurigram
+pyrofrok
 python-dotenv
 python-magic
 qbittorrent-api
