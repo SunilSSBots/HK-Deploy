@@ -141,13 +141,7 @@ _SKIP_KEYS = {"_id", "_____REMOVE_THIS_LINE_____"}
 
 
 def _parse_env_file(filepath: str) -> "dict[str, str]":
-    """Parse a dotenv file into an ordered dict. Skips comments and blanks.
-
-    Handles:
-      - Quoted values:   KEY="value"  or  KEY='value'  (inline # comment ignored)
-      - Unquoted values: KEY=value    (everything after ' #' treated as comment)
-      - Surrounding quotes are stripped from the final value.
-    """
+    """Parse a dotenv file into an ordered dict. Skips comments and blanks."""
     result: dict[str, str] = {}
     try:
         with open(filepath) as _f:
@@ -159,23 +153,9 @@ def _parse_env_file(filepath: str) -> "dict[str, str]":
                     continue
                 _k, _, _v = _line.partition("=")
                 _k = _k.strip()
-                _v = _v.strip()
-                if not _k:
-                    continue
-                # Quoted value — extract only what's inside the first pair of
-                # matching quotes; anything after the closing quote is ignored
-                # (handles inline comments like: KEY="val"  # some comment).
-                if _v and _v[0] in ('"', "'"):
-                    _q = _v[0]
-                    _end = _v.find(_q, 1)
-                    _v = _v[1:_end] if _end != -1 else _v[1:]
-                else:
-                    # Unquoted value — strip inline comment (space/tab + #)
-                    for _sep in (" #", "\t#"):
-                        if _sep in _v:
-                            _v = _v[: _v.index(_sep)].strip()
-                            break
-                result[_k] = _v
+                _v = _v.strip().strip('"').strip("'")
+                if _k:
+                    result[_k] = _v
     except Exception:
         pass
     return result
@@ -198,16 +178,6 @@ if db_doc:
         str_val = str(value).strip()
         if str_val in ("", "None"):
             continue
-        # Strip accidental surrounding quotes stored in MongoDB
-        # (e.g. '"-1002548007457"' instead of '-1002548007457').
-        # _write step wraps every value in its own quotes, so a value
-        # that already has quotes becomes double-quoted in config.env,
-        # leaving a stray trailing quote after dotenv parsing → int() crash.
-        if len(str_val) >= 2 and (
-            (str_val.startswith('"') and str_val.endswith('"'))
-            or (str_val.startswith("'") and str_val.endswith("'"))
-        ):
-            str_val = str_val[1:-1]
         _merged[key] = str_val
         _mongo_written += 1
 
