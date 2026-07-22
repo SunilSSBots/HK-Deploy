@@ -178,6 +178,16 @@ if db_doc:
         str_val = str(value).strip()
         if str_val in ("", "None"):
             continue
+        # Strip accidental surrounding quotes stored in MongoDB
+        # (e.g. '"-1002548007457"' instead of '-1002548007457').
+        # _write step wraps every value in its own quotes, so a value
+        # that already has quotes becomes double-quoted in config.env,
+        # leaving a stray trailing quote after dotenv parsing → int() crash.
+        if len(str_val) >= 2 and (
+            (str_val.startswith('"') and str_val.endswith('"'))
+            or (str_val.startswith("'") and str_val.endswith("'"))
+        ):
+            str_val = str_val[1:-1]
         _merged[key] = str_val
         _mongo_written += 1
 
