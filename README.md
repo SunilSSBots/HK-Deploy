@@ -1,22 +1,31 @@
 <div align="center">
 
-# 🤖 SSLeech — Heroku Deploy Guide
+# 🤖 SSLeech — Heroku Deploy Kit
 
-**Google Colab se Heroku pe SSLeech Bot deploy karo**
+**Google Colab se SSLeech bot ko Heroku Container Stack par deploy karo**
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SunilSharmaNP/VidLM/blob/main/ssleech_hk_deploy.ipynb)
-[![Bot Repo](https://img.shields.io/badge/Bot_Repo-SSLeech-blue?style=flat&logo=github)](https://github.com/SunilSharmaNP/SSLeech)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SunilSSBots/HK-Deploy/blob/main/ssleech_hk_deploy.ipynb)
+[![Bot Repo](https://img.shields.io/badge/Bot_Repo-SSLeech-blue?style=flat&logo=github)](https://github.com/SunilSSBots/ssleech-hk)
 [![Base Image](https://img.shields.io/badge/Base_Image-ssbots__heroku-blue?style=flat&logo=docker)](https://hub.docker.com/r/sunilsharmanp/ssbots_heroku)
+
+<br>
+<img src="assets/ssleech-thumbnail.jpg" alt="SSLeech thumbnail" width="720">
 
 </div>
 
 ---
 
+## ✨ Is repo mein kya hai
+
+Ye repository SSLeech ko Heroku par deploy karne ke liye ready-to-use files aur mobile-friendly Google Colab notebook deti hai. Notebook app create karne, config save karne aur ek ya multiple apps deploy karne ka flow handle karti hai.
+
 ## 📦 Repo Structure
 
 ```
-VidLM/
+HK-Deploy/
 ├── ssleech_hk_deploy.ipynb   ← Google Colab Notebook (MAIN FILE)
+├── assets/
+│   └── ssleech-thumbnail.jpg  ← SSLeech thumbnail
 ├── Dockerfile                ← Heroku Docker build file
 ├── heroku.yml                ← Heroku stack config
 ├── start.sh                  ← Bot startup script
@@ -35,21 +44,21 @@ VidLM/
 
 **Step 1:** Niche badge pe click karo — Colab mein notebook khulegi
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SunilSharmaNP/VidLM/blob/main/ssleech_hk_deploy.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SunilSSBots/HK-Deploy/blob/main/ssleech_hk_deploy.ipynb)
 
-**Step 2:** Har cell ko **upar se niche** order mein run karo:
+**Step 2:** Har cell ko **upar se neeche** isi order mein run karo:
 
 | Step | Cell | Kya karna hai |
 |------|------|---------------|
-| 1️⃣ | Heroku Login | Email + API Token daalo |
-| 2️⃣ | Create App | App naam aur region choose karo |
-| 3️⃣ | Required Config | BOT_TOKEN, OWNER_ID, etc. set karo |
-| 4️⃣ | Optional Config | GDrive, RClone, limits set karo (skip kar sakte ho) |
-| 5️⃣ | Deploy Bot | App naam daalo — deploy start ho jayega |
+| 1 | Heroku Login | Email + Personal API Token daalo |
+| 2 | Create App | App name, region aur optional team choose karo |
+| 3 | Config Setup | Bot credentials, MongoDB URI aur upstream branch set karo |
+| 4 | Deploy Bot | Saved app name(s) daalo — deploy start ho jayega |
+| 5 | Logs / Logout | Zarurat par logs dekho, phir Heroku logout karo |
 
 **Step 3:** 5-10 minute wait karo — Docker build hoga
 
-**Step 4:** Telegram mein bot ko `/start` bhejo ✅
+**Step 4:** Deploy complete hone ke baad Telegram mein bot ko `/start` bhejo ✅
 
 </details>
 
@@ -60,7 +69,7 @@ VidLM/
 <details>
 <summary><b>Steps Expand Karo 👆</b></summary>
 
-**Step 1:** [SSLeech repo](https://github.com/SunilSharmaNP/SSLeech) ko Fork karo
+**Step 1:** [SSLeech repo](https://github.com/SunilSSBots/ssleech-hk) ko Fork karo
 
 **Step 2:** Fork kiye repo mein ye secrets add karo (Settings → Secrets → Actions):
 
@@ -90,8 +99,8 @@ VidLM/
 | `TELEGRAM_API` | Telegram API ID | [my.telegram.org](https://my.telegram.org/apps) |
 | `TELEGRAM_HASH` | Telegram API Hash | [my.telegram.org](https://my.telegram.org/apps) |
 | `DATABASE_URL` | MongoDB Connection URI | [MongoDB Atlas](https://cloud.mongodb.com) (free) |
-| `UPSTREAM_REPO` | Bot Source Repo | `https://github.com/SunilSharmaNP/SSLeech` |
-| `UPSTREAM_BRANCH` | Bot Branch | `lp` |
+| `UPSTREAM_REPO` | Bot Source Repo | `https://github.com/SunilSSBots/ssleech-hk` |
+| `UPSTREAM_BRANCH` | Bot Branch | `ssleech-hk` |
 
 ---
 
@@ -113,5 +122,7 @@ Python     : 3.13-slim-bookworm
 
 ## ❓ Help
 
-- 🔗 **Bot Repo Issues:** [SSLeech Issues](https://github.com/SunilSharmaNP/SSLeech/issues)
+- 🔗 **Bot Repo Issues:** [SSLeech Issues](https://github.com/SunilSSBots/ssleech-hk/issues)
 - 🐳 **Base Image:** [Docker Hub](https://hub.docker.com/r/sunilsharmanp/ssbots_heroku)
+
+> **Security:** Colab mein credentials fill karne ke baad notebook ko filled values ke saath public repository mein commit na karein. Heroku API token, Telegram bot token aur MongoDB URI ko private rakhein.
