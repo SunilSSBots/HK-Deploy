@@ -1,5 +1,5 @@
 """
-update.py — VidLM deployment helper for SSLeech on Heroku.
+update.py — HK-Deploy deployment helper for SSLeech on Heroku.
 
 MINIMUM required Heroku config vars (only these 2 are truly mandatory):
   BOT_TOKEN     — identifies which MongoDB partition to load
