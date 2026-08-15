@@ -98,20 +98,6 @@ The Docker build typically takes several minutes. Once deployment is complete, s
 | `UPSTREAM_REPO` | SSLeech source repository | `https://github.com/SunilSSBots/ssleech-hk` |
 | `UPSTREAM_BRANCH` | Source branch to deploy | `ssleech-hk` |
 
-## Docker Environment
-
-```text
-Base image : sunilsharmanp/ssbots_heroku:latest
-Stack      : Heroku Container Stack
-Python     : 3.13-slim-bookworm
-```
-
-The base image includes:
-
-- `aria2c` (`blitzfetcher`)
-- `ffmpeg` (`mediaforge`)
-- `rclone` (`ghostdrive`)
-- `qbittorrent-nox` (`stormtorrent`)
 
 ---
 
